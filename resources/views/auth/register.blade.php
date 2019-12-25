@@ -12,7 +12,7 @@
             @csrf
 
             <div class="form-group row">
-              <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+              <label for="name" class="col-md-4 col-form-label text-md-right">Username</label>
 
               <div class="col-md-6">
                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -58,6 +58,18 @@
 
               <div class="col-md-6">
                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-6 offset-md-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="admin" value="1" {{ old('admin') ? 'checked' : '' }}>
+
+                  <label class="form-check-label" for="remember">
+                    Register as admin
+                  </label>
+                </div>
               </div>
             </div>
 
