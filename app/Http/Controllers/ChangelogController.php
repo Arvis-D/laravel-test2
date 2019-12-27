@@ -27,6 +27,6 @@ class ChangelogController extends Controller
         return view('changelog', [
             'changelog' => $changelog,
             'filtered' => $changelogFiltered
-            ]);
+        ]);
     }
 }

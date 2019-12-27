@@ -22,5 +22,4 @@ Route::post("/products/store", "ProductsController@store")->name('store-product'
 Route::put("/products/update/{id}", "ProductsController@update")->name('update-product');
 Route::delete("/products/delete/{id}", "ProductsController@destroy")->name('delete-product');
 
-Route::get('/changelog/*', 'ChangelogController@filter')->name('changelog');
 Route::get('/changelog', 'ChangelogController@index')->name('changelog');

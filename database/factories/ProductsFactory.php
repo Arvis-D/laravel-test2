@@ -2,11 +2,13 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
+use App\Products;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Products::class, function (Faker $faker) {
     return [
-        //
+        'title' => $faker->sentence,
+        'quantity' => rand(0, 100),
+        'price' => rand(0, 100)
     ];
 });
