@@ -14,3 +14,10 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/products', 'ProductsController@index')->name('products');
+Route::get('/products/edit/{id}', 'ProductsController@edit')->name('edit-product');
+Route::get('/products/create', 'ProductsController@create')->name('create-product');
+Route::post("/products/store", "ProductsController@store")->name('store-product');
+
+Route::get('/changelog', 'ChangelogController@index')->name('changelog');
