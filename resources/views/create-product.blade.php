@@ -8,6 +8,7 @@
         <div class="card-header">Add a new product</div>
 
         <div class="card-body">
+          @if(Auth::user()->admin)
           <form method="POST" action="{{ route('store-product') }}">
             @csrf
 
@@ -62,6 +63,9 @@
             </div>
 
           </form>
+          @else
+          <h3>Login as admin to add a product</h3>
+          @endif
         </div>
       </div>
     </div>

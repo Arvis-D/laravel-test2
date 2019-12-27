@@ -15,13 +15,10 @@ class CreateProductsAuditTable extends Migration
     {
         Schema::create('products_audit', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('product_id');
-            $table->string('message');
+            $table->string('user_name');
+            $table->string('product_title');
+            $table->string('action');
             $table->timestamps();
-
-            $table->foreign("user_id")->references("id")->on("users");
-            $table->foreign("product_id")->references("id")->on("products");
         });
     }
 

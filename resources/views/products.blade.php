@@ -8,7 +8,9 @@
         <div class="card-header">
           <ul class="list-group list-group-horizontal-lg">
             <a href="{{route("products")}}" class="list-group-item active text-white text-decoration-none">Products</a>
-            <a href="{{route("changelog")}}" class="list-group-item text-decoration-none">Changelog</a>
+            @if(Auth::user()->admin)
+              <a href="{{route("changelog")}}" class="list-group-item text-decoration-none">Changelog</a>
+            @endif
           </ul>
         </div>
           <table class="table">
@@ -18,8 +20,10 @@
                 <th scope="col">Title</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Price</th>
-                <th scope="col"></th>
-              <th scope="col"><a href="{{route('create-product')}}" class="btn btn-success text-white">Add</a></th>
+                <th scope="col">Total Price</th>
+                @if(Auth::user()->admin)
+                <th scope="col"><a href="{{route('create-product')}}" class="btn btn-success text-white">Add</a></th>
+                @endif
               </tr>
             </thead>
             <tbody>
@@ -28,9 +32,20 @@
                   <th scope="row">{{$item->id}}</th>
                   <td>{{$item->title}}</td>
                   <td>{{$item->quantity}}</td>
-                  <td>{{$item->price}}</td>
-                  <td><a href="" class="btn btn-danger btn-sm text-white">Delete</a></td>
-                  <td><a href="products/edit/{{$item->id}}" class="btn btn-primary btn-sm text-white">Edit</a></td>
+                  <td>{{$item->priceVAT}}</td>
+                  <td>{{$item->totalPriceVAT}}</td>
+                  @if(Auth::user()->admin)
+                  <td>
+                    <form action="products/delete/{{$item->id}}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <button class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                  </td>
+                  <td>
+                    <a href="products/edit/{{$item->id}}" class="btn btn-primary btn-sm text-white">Edit</a>
+                  </td>
+                  @endif
                 </tr>
               @endforeach
             </tbody>

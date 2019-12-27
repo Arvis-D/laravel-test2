@@ -8,16 +8,18 @@
         <div class="card-header">Add a new product</div>
 
         <div class="card-body">
-          <form method="POST" action="{{ route('login') }}">
+          @if(Auth::user()->admin)
+          <form method="POST" action="{{ route('update-product', ['id' => $product->id]) }}">
             @csrf
+            @method('put')
 
             <div class="form-group row">
-              <label for="name" class="col-md-4 col-form-label text-md-right">Title</label>
+              <label for="title" class="col-md-4 col-form-label text-md-right">Title</label>
 
               <div class="col-md-6">
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{$product->title}}" required autocomplete="name" autofocus>
 
-                @error('name')
+                @error('title')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
@@ -26,12 +28,12 @@
             </div>
 
             <div class="form-group row">
-              <label for="password" class="col-md-4 col-form-label text-md-right">Quantity</label>
+              <label for="quantity" class="col-md-4 col-form-label text-md-right">Quantity</label>
 
               <div class="col-md-6">
-                <input id="password" type="text" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+              <input id="quantity" type="text" class="form-control @error('quantity') is-invalid @enderror" name="quantity" required autocomplete="current-quantity" value="{{$product->quantity}}">
 
-                @error('password')
+                @error('quantity')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
@@ -40,12 +42,12 @@
             </div>
 
             <div class="form-group row">
-              <label for="name" class="col-md-4 col-form-label text-md-right">Price</label>
+              <label for="price" class="col-md-4 col-form-label text-md-right">Price</label>
 
               <div class="col-md-6">
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{$product->quantity}}" required autocomplete="price" autofocus>
 
-                @error('name')
+                @error('price')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
@@ -62,6 +64,9 @@
             </div>
 
           </form>
+          @else
+           <h2>Login as admin to edit a product!</h2>
+          @endif
         </div>
       </div>
     </div>
