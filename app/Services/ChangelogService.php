@@ -5,9 +5,9 @@ namespace App\Services;
 use App\Changelog;
 use Illuminate\Support\Facades\Auth;
 
-trait ChangelogService
+class ChangelogService
 {
-    protected function createChangelog($item, $action)
+    public function createChangelog($item, $action)
     {
         $changelog = new Changelog([
             'user_name' => Auth::user()->name,

@@ -2,11 +2,16 @@
 
 namespace App\Services;
 
-use App\Products;
-
-trait ProductsService
+class ProductsService
 {
-    protected function validateProduct($request)
+    private $VAT;
+
+    public function __construct()
+    {
+        $this->VAT = config('products.VAT');
+    }
+
+    public function validateProduct($request)
     {
         return $request->validate([
             "title" => "required",
@@ -15,7 +20,7 @@ trait ProductsService
         ]);
     }
 
-    protected function addVATToProducts($products)
+    public function addVATToProducts($products)
     {
         foreach($products as $product){
             $product['priceVAT'] = number_format(
@@ -27,12 +32,12 @@ trait ProductsService
         return $products;
     }
 
-    protected function getPriceWithVAT($price)
+    private function getPriceWithVAT($price)
     {
-        return $price - ($price * config('products.VAT'));
+        return $price - ($price * $this->VAT);
     }
 
-    protected function getTotalPriceWithVAT($quantity, $price)
+    private function getTotalPriceWithVAT($quantity, $price)
     {
         return $this->getPriceWithVAT($price) * $quantity;
     }
